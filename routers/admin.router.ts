@@ -28,18 +28,19 @@ export const adminRouter = Router()
                 login: `${req.body.login}`,
             }) as unknown as AdminPassResults;
             if (results.length > 0) {
-                bcrypt.compare(adminPassword, req.body.hashedPassword.toString(), (e, result) => {
+                const {hashedPassword} = req.body;
+                bcrypt.compare(adminPassword, hashedPassword.toString(), (e, result) => {
                     if (result) {
                         console.log('Logged IN!!');
-                        res.json({message: 'Logged in successfully'});
+                        res.json({message: 'Zalogowano poprawnie'});
                     } else {
                         console.log('Your password is Incorrect!! Try again!');
-                        res.status(401).json({message: 'Unauthorized'});
+                        res.status(401).json({message: 'Login lub hasło są niepoprawne!'});
                     }
                 });
             } else {
                 console.log('No email existed!');
-                res.status(401).json({message: 'Unauthorized'});
+                res.status(401).json({message: 'Login lub hasło są niepoprawne!'});
 
             }
 

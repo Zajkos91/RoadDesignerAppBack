@@ -35,10 +35,18 @@ export const roadRouter = Router()
 
     .patch('/:id', async (req, res) => {
         const road  = await RoadRecord.getOne(req.params.id);
+        const body = req.body;
 
         if(road === null) {
             throw new ValidationError('Not found road with that Id');
         }
-        await road.update();
-        res.json(road);
+        console.log(body);
+        console.log(road);
+
+        const {startAddress, endAddress, ...rest} = body
+        const updatedRoad = new RoadRecord({...road, ...rest});
+        console.log(updatedRoad);
+
+        await updatedRoad.update();
+        res.json(updatedRoad);
     });

@@ -71,8 +71,8 @@ export class RoadRecord implements RoadEntity {
 
         return results.map(result => {
 
-            const {id, name, startLat, startLon, endLat, endLon} = result;
-            return {id, name, startLat, startLon, endLat, endLon}
+            const {id, name, description, url, realisationYear, startLat, startLon, endLat, endLon} = result;
+            return {id, name, description, url, realisationYear, startLat, startLon, endLat, endLon}
         });
     }
 
@@ -105,21 +105,21 @@ export class RoadRecord implements RoadEntity {
         });
     }
 
-    async update() {
+    async update(): Promise<void> {
         if(!this.id) {
             throw new ValidationError('Road has no Id');
         }
 
-        await pool.execute('UPDATE `roads` SET `name` = :name, `url` = :url  WHERE `id` = :id;',{
+        await pool.execute("UPDATE `roads` SET `name` = :name, `description` = :description, `realisationYear` = :realisationYear,`url` = :url, `startLat` = :startLat, `startLon` = :startLon, `endLat` = :endLat, `endLon` = :endLon WHERE `id` = :id",{
             id: this.id,
             name: this.name,
-            // description: this.description,
-            // realisationYear: this.realisationYear,
+            description: this.description,
+            realisationYear: this.realisationYear,
             url: this.url,
-            // startLat: this.startLat,
-            // startLon: this.startLon,
-            // endLat: this.endLat,
-            // endLon: this.endLon,
+            startLat: this.startLat,
+            startLon: this.startLon,
+            endLat: this.endLat,
+            endLon: this.endLon,
         });
 
     };
