@@ -1,6 +1,4 @@
 import {Router} from "express";
-
-import {ValidationError} from "../utils/errors";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 import {pool} from "../utils/db";

@@ -11,6 +11,8 @@ export interface SimpleRoadEntity {
     startLon: number;
     endLat: number;
     endLon: number;
+    startAddress: string;
+    endAddress: string;
 }
 
 export interface RoadEntity extends SimpleRoadEntity{
