@@ -4,6 +4,7 @@ import "express-async-errors";
 import {handleError} from "./utils/errors";
 import rateLimit from "express-rate-limit";
 import {roadRouter} from "./routers/road.router";
+import {adminRouter} from "./routers/admin.router";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(rateLimit({
 }));
 
 app.use('/road', roadRouter);
+app.use('/login', adminRouter);
 app.use(handleError);
 
 app.listen(3001, '0.0.0.0', () => {
